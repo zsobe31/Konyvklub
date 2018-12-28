@@ -27,6 +27,12 @@
         <br>
         <h1 class="text-center">Könyv lista</h1>
         <br>
+        <div class="container text-center" style="background-color: aquamarine; margin-bottom: 25px">
+            <span>sorszám</span>
+            <span>Könyv címe</span>
+            <span>szerző</span>
+            <span>műfaj</span>
+        </div>
         <div id="konyvek" class="container text-center"></div>
         
         <div class="container">
@@ -37,7 +43,7 @@
                 <input id="konyvcim" type="text" placeholder="Könyv címe">
                 <input id="konyvszerzo" type="text" placeholder="szerző">
                 <input id="konyvmufaj" type="text" placeholder="könyv műfaja">
-                <button onclick="ujkonyv()">Hozzáad</button>
+                <button onclick="ujkonyv()" class="btn btn-success">Hozzáad</button>
             </div>
             <br>
             <hr>
@@ -47,14 +53,14 @@
                 <input id="modcim" type="text" placeholder="Könyv címe">
                 <input id="modszerzo" type="text" placeholder="szerző">
                 <input id="modmufaj" type="text" placeholder="könyv műfaja">
-                <button onclick="modkonyv()">Módosít</button>
+                <button onclick="modkonyv()" class="btn btn-danger">Módosít</button>
             </div>
             <br>
             <hr>
             <div class="container">
                 <h5>Törlés</h5>
                 <input id="konyvid" type="text" placeholder="Könyv sorszáma">
-                <button onclick="torolkonyv()">Törlés</button>
+                <button onclick="torolkonyv()" class="btn btn-primary">Törlés</button>
             </div>
             <br style="padding-bottom: 500px;">
         </div>
