@@ -112,14 +112,14 @@ public class Klubtag implements Serializable {
     }
     
     // törlés
-    public static void deleteTag(EntityManager em, int id){
-        StoredProcedureQuery spq = em.createStoredProcedureQuery("deleteTag");
-        em.getTransaction().begin();
-        spq.registerStoredProcedureParameter("idIN", Integer.class, ParameterMode.IN);
-        spq.setParameter("idIN", id);    
-        spq.execute();
-        em.getTransaction().commit();
-    }
+//    public static void deleteTag(EntityManager em, int id){
+//        StoredProcedureQuery spq = em.createStoredProcedureQuery("deleteTag");
+//        em.getTransaction().begin();
+//        spq.registerStoredProcedureParameter("idIN", Integer.class, ParameterMode.IN);
+//        spq.setParameter("idIN", id);    
+//        spq.execute();
+//        em.getTransaction().commit();
+//    }
     
     // login tárolt eljárás 
     public static Klubtag login(EntityManager em, String nev, String jelszo){

@@ -106,6 +106,14 @@ public class Controller extends HttpServlet {
                     out.print(j.toString());
                 }
             }
+            
+            if(request.getParameter("task").equals("ujTag")){
+                String nevF = request.getParameter("nev");
+                String jelszoF = request.getParameter("jelszo");
+                
+                Klubtag.addNewTag(em, nevF, jelszoF);
+                out.print("OK!");
+            }
         }
     }
 

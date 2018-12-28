@@ -90,4 +90,20 @@ function belep(){
     });
 }
 
+function regisztral(){
+    var a = document.getElementById("ujnev").value;
+    var b = document.getElementById("ujjelszo").value;
+    $.ajax({
+       url:"Controller",
+       type:"post",
+       data:{"task":"ujTag", "nev":a, "jelszo":b},
+       success:function(valasz){
+           valasz.result;
+       },
+       error:function(){
+           //alert("reg hiba");
+       }
+    });
+}
+
 
