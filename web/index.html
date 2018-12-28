@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Konyvklub</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">       
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        
+        <script src="main.js"></script>
+        
+        <style>
+            span{
+                display: inline-block;
+                overflow: auto;
+                width: 150px;
+                border-bottom: 1px solid;
+            }
+        </style>
+        
+    </head>
+    <body onload="betolt()">
+        <br>
+        <h1 class="text-center">Könyv lista</h1>
+        <br>
+        <div id="konyvek" class="container text-center"></div>
+        
+        <div class="container">
+            <br>
+            <hr>
+            <div class="container">
+                <h5>Felvitel</h5>
+                <input id="konyvcim" type="text" placeholder="Könyv címe">
+                <input id="konyvszerzo" type="text" placeholder="szerző">
+                <input id="konyvmufaj" type="text" placeholder="könyv műfaja">
+                <button onclick="ujkonyv()">Hozzáad</button>
+            </div>
+            <br>
+            <hr>
+            <div class="container">
+                <h5>Módosít</h5>
+                <input id="modid" type="text" placeholder="Könyv sorszáma">
+                <input id="modcim" type="text" placeholder="Könyv címe">
+                <input id="modszerzo" type="text" placeholder="szerző">
+                <input id="modmufaj" type="text" placeholder="könyv műfaja">
+                <button onclick="modkonyv()">Módosít</button>
+            </div>
+            <br>
+            <hr>
+            <div class="container">
+                <h5>Törlés</h5>
+                <input id="konyvid" type="text" placeholder="Könyv sorszáma">
+                <button onclick="torolkonyv()">Törlés</button>
+            </div>
+            <br style="padding-bottom: 500px;">
+        </div>
+    </body>
+</html>
