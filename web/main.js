@@ -104,6 +104,8 @@ function regisztral(){
            //alert("reg hiba");
        }
     });
+    setTimeout(function()
+    { location.reload(true); }, 1000);
 }
 
 
