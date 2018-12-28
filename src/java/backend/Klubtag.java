@@ -66,24 +66,24 @@ public class Klubtag implements Serializable {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     public String getNev() {
         return nev;
     }
 
-    public void setNev(String nev) {
-        this.nev = nev;
-    }
+//    public void setNev(String nev) {
+//        this.nev = nev;
+//    }
 
     public String getJelszo() {
         return jelszo;
     }
 
     public void setJelszo(String jelszo) {
-        this.jelszo = jelszo;
+        //this.jelszo = jelszo;
     }
     
     // az adatok listázása
@@ -121,19 +121,53 @@ public class Klubtag implements Serializable {
         em.getTransaction().commit();
     }
     
+    // login tárolt eljárás 
+    public static Klubtag login(EntityManager em, String nev, String jelszo){
+        Klubtag f = null;
+        
+        try{
+            //tárolt eljárás létrehozása/meghívása:
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("login");
+            //nevIN param. regisztrálása:
+            spq.registerStoredProcedureParameter("nevIN", String.class, ParameterMode.IN);
+            //jelszoIN parameter regisztralasa:
+            spq.registerStoredProcedureParameter("jelszoIN", String.class, ParameterMode.IN);
+            //idOUT param. regisztrálása:
+            spq.registerStoredProcedureParameter("idOUT", Integer.class, ParameterMode.OUT);
+            //nevIN értékadás:
+            spq.setParameter("nevIN", nev);
+            //jelszoIN értékadás:
+            spq.setParameter("jelszoIN", jelszo);
+            //execute:
+            spq.execute();
+            //idOUT kiolvasása:
+            Object idO = spq.getOutputParameterValue("idOUT");
+            String idS = idO.toString();
+            int id = Integer.parseInt(idS);
+            //em.find-al példányosítju az f felhasználónkat:
+            f = em.find(Klubtag.class, id);
+            
+        }
+        catch(Exception ex){
+            System.out.println("Hiba: " + ex.toString());
+        }
+        
+        return f;
+    }
+    
     // módosít
-    public static Klubtag findByIdTag(EntityManager em, int id){
-        List<Klubtag> elemek = Klubtag.getAllTagByNev(em);
-        Klubtag e = em.find(Klubtag.class, id);
-        return e;
-    }
-    public static void updateTag(EntityManager em, String nev, String jelszo, int id){
-        Klubtag e = Klubtag.findByIdTag(em, id);
-        em.getTransaction().begin();
-        e.setNev(nev);
-        e.setJelszo(jelszo);
-        em.getTransaction().commit();
-    }
+//    public static Klubtag findByIdTag(EntityManager em, int id){
+//        List<Klubtag> elemek = Klubtag.getAllTagByNev(em);
+//        Klubtag e = em.find(Klubtag.class, id);
+//        return e;
+//    }
+//    public static void updateTag(EntityManager em, String nev, String jelszo, int id){
+//        Klubtag e = Klubtag.findByIdTag(em, id);
+//        em.getTransaction().begin();
+//        e.setNev(nev);
+//        e.setJelszo(jelszo);
+//        em.getTransaction().commit();
+//    }
 
     @Override
     public int hashCode() {

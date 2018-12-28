@@ -71,4 +71,23 @@ function torolkonyv(){
     { location.reload(true); }, 1000);
 }
 
+function belep(){
+    var a = document.getElementById("nev").value;
+    var b = document.getElementById("jelszo").value;
+    $.ajax({
+       url:"Controller",
+       type:"post",
+       data:{"task":"login", "nev":a, "jelszo":b},
+       success:function(valasz){
+           valasz.result;
+            if (valasz.success == 1) {
+                window.location = "konyvklub.html";
+            }
+       },
+       error:function(){
+           alert("Belépés hiba");
+       }
+    });
+}
+
 

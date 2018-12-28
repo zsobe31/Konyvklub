@@ -88,7 +88,24 @@ public class Controller extends HttpServlet {
                 out.print("OK!");
             }
             
-            
+            if(request.getParameter("task").equals("login")){
+                String nevL = request.getParameter("nev");
+                String jelszoL = request.getParameter("jelszo");
+                Klubtag k = Klubtag.login(em, nevL, jelszoL);
+                if(k != null){
+                    request.getSession().setAttribute("a", k);
+                    JSONObject j = new JSONObject();
+                    j.put("result", "Üdvözlünk kedves " + k.getNev());
+                    j.put("success", "1");
+                    out.print(j.toString());
+                }
+                else{
+                    JSONObject j = new JSONObject();
+                    j.put("result", "Hibás felhasználónév vagy jelszó!");
+                    j.put("success", "0");
+                    out.print(j.toString());
+                }
+            }
         }
     }
 
