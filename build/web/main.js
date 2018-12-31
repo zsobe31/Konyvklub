@@ -11,6 +11,7 @@ function betolt(){
                     DIV.innerHTML += "<span>" + valasz[i].cim + "</span>";
                     DIV.innerHTML += "<span>" + valasz[i].szerzo + "</span>";
                     DIV.innerHTML += "<span>" + valasz[i].mufaj + "</span>";
+                    DIV.innerHTML += "<span>" + valasz[i].webcim + "</span>";
                 DIV.innerHTML += "</div>";
             }
        },
@@ -25,10 +26,11 @@ function ujkonyv(){
     var uja = document.getElementById("konyvcim").value;
     var ujb = document.getElementById("konyvszerzo").value;
     var ujc = document.getElementById("konyvmufaj").value;
+    var ujd = document.getElementById("webcim").value;
     $.ajax({
         url:"Controller",
         type:"post",
-        data:{"task":"ujKonyv", "cim":uja, "szerzo":ujb, "mufaj":ujc},
+        data:{"task":"ujKonyv", "cim":uja, "szerzo":ujb, "mufaj":ujc, "webcim":ujd},
         success:function(valasz){
             valasz.success;
         },
@@ -43,10 +45,11 @@ function modkonyv(){
     var modb = document.getElementById("modcim").value;
     var modc = document.getElementById("modszerzo").value;
     var modd = document.getElementById("modmufaj").value;
+    var modw = document.getElementById("modwebcim").value;
     $.ajax({
        url:"Controller",
        type:"post",
-       data:{"task":"modKonyv", "id":moda, "cim":modb, "szerzo":modc, "mufaj":modd},
+       data:{"task":"modKonyv", "id":moda, "cim":modb, "szerzo":modc, "mufaj":modd, "webcim":modw},
        success:function(valasz){
          valasz.success;
        },
@@ -79,7 +82,7 @@ function belep(){
        type:"post",
        data:{"task":"login", "nev":a, "jelszo":b},
        success:function(valasz){
-           valasz.result;
+           alert(valasz.result);
             if (valasz.success == 1) {
                 window.location = "konyvklub.html";
             }
@@ -88,6 +91,8 @@ function belep(){
            alert("Belépés hiba");
        }
     });
+    setTimeout(function()
+    { location.reload(true); }, 1000);
 }
 
 function regisztral(){
@@ -98,7 +103,7 @@ function regisztral(){
        type:"post",
        data:{"task":"ujTag", "nev":a, "jelszo":b},
        success:function(valasz){
-           valasz.result;
+               alert(valasz.result);
        },
        error:function(){
            //alert("reg hiba");

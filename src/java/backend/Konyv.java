@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Konyv.findById", query = "SELECT k FROM Konyv k WHERE k.id = :id")
     , @NamedQuery(name = "Konyv.findByCim", query = "SELECT k FROM Konyv k WHERE k.cim = :cim")
     , @NamedQuery(name = "Konyv.findBySzerzo", query = "SELECT k FROM Konyv k WHERE k.szerzo = :szerzo")
-    , @NamedQuery(name = "Konyv.findByMufaj", query = "SELECT k FROM Konyv k WHERE k.mufaj = :mufaj")})
+    , @NamedQuery(name = "Konyv.findByMufaj", query = "SELECT k FROM Konyv k WHERE k.mufaj = :mufaj")
+    , @NamedQuery(name = "Konyv.findByWebcim", query = "SELECT k FROM Konyv k WHERE k.webcim = :webcim")})
 public class Konyv implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,6 +53,9 @@ public class Konyv implements Serializable {
     @Basic(optional = false)
     @Column(name = "mufaj")
     private String mufaj;
+    @Basic(optional = false)
+    @Column(name = "webcim")
+    private String webcim;
 
     public Konyv() {
     }
@@ -60,11 +64,12 @@ public class Konyv implements Serializable {
         this.id = id;
     }
 
-    public Konyv(Integer id, String cim, String szerzo, String mufaj) {
+    public Konyv(Integer id, String cim, String szerzo, String mufaj, String webcim) {
         this.id = id;
         this.cim = cim;
         this.szerzo = szerzo;
         this.mufaj = mufaj;
+        this.webcim = webcim;
     }
 
     public Integer getId() {
@@ -98,6 +103,14 @@ public class Konyv implements Serializable {
     public void setMufaj(String mufaj) {
         this.mufaj = mufaj;
     }
+
+    public String getWebcim() {
+        return webcim;
+    }
+
+    public void setWebcim(String webcim) {
+        this.webcim = webcim;
+    }
     
     // az adatok listázása
     public static List<Konyv> getAllKonyvById(EntityManager em){
@@ -126,15 +139,17 @@ public class Konyv implements Serializable {
 //        em.getTransaction().commit();
 //    }
     
-    public static Konyv addNewKonyv(EntityManager em, String cim, String szerzo, String mufaj){
+    public static Konyv addNewKonyv(EntityManager em, String cim, String szerzo, String mufaj, String webcim){
         Konyv k = null;
         StoredProcedureQuery spq = em.createStoredProcedureQuery("addNewKonyv");
         spq.registerStoredProcedureParameter("cimIN", String.class, ParameterMode.IN);
         spq.registerStoredProcedureParameter("szerzoIN", String.class, ParameterMode.IN);
         spq.registerStoredProcedureParameter("mufajIN", String.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("webcimIN", String.class, ParameterMode.IN);
         spq.setParameter("cimIN", cim);
         spq.setParameter("szerzoIN", szerzo);
         spq.setParameter("mufajIN", mufaj);
+        spq.setParameter("webcimIN", webcim);
         spq.execute();
         return k;
     }
@@ -155,12 +170,13 @@ public class Konyv implements Serializable {
         Konyv e = em.find(Konyv.class, id);
         return e;
     }
-    public static void updateKonyv(EntityManager em, String cim, String szerzo, String mufaj, int id){
+    public static void updateKonyv(EntityManager em, String cim, String szerzo, String mufaj, String webcim, int id){
         Konyv e = Konyv.findByIdKonyv(em, id);
         em.getTransaction().begin();
         e.setCim(cim);
         e.setSzerzo(szerzo);
         e.setMufaj(mufaj);
+        e.setWebcim(webcim);
         em.getTransaction().commit();
     }
     

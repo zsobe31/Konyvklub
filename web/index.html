@@ -14,28 +14,35 @@
         <script src="main.js"></script>
         
         <style>
-            
+            body{
+                background-color: coral;
+            }
+            input{
+                width: 200px;
+            }
         </style>
         
     </head>
     <body>
         
+        <br>
         <div class="container text-center">
-            <h1>Üdvözöllek</h1>
+            <h1>Üdvözöllek a könyv klubban!</h1>
             <br>
             <hr>
             <div class="container">
                 <p><input id="nev" type="text" placeholder="felhasználónév"></p>
                 <p><input id="jelszo" type="password" placeholder="jelszó"></p>
-                <button onclick="belep()" class="btn btn-secondary">Belépés</button>
+                <button onclick="belep()" class="btn btn-success">Belépés</button>
             </div>
             <br>
             <hr>
             <div class="container">
-                <p><input id="ujnev" type="text" placeholder="felhasználónév"></p>
+                <p><input id="ujnev" type="text" placeholder="regisztrációs név"></p>
                 <p><input id="ujjelszo" type="password" placeholder="jelszó"></p>
-                <button onclick="regisztral()" class="btn btn-secondary">regisztálás</button>
+                <button onclick="regisztral()" class="btn btn-primary">Regisztrál</button>
             </div>
+            <hr>
         </div>
         
         

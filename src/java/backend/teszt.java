@@ -22,7 +22,7 @@ public class teszt {
 
 //          Konyv.deleteKonyv(em, 11);
 
-        Konyv.addNewKonyv(em, "Sakk", "Áron", "oktatás");
+        //Konyv.addNewKonyv(em, "Sakk", "Áron", "oktatás");
 
     }
     

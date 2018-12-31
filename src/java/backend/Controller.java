@@ -55,6 +55,7 @@ public class Controller extends HttpServlet {
                     o.put("cim", e.getCim());
                     o.put("szerzo", e.getSzerzo());
                     o.put("mufaj", e.getMufaj());
+                    o.put("webcim", e.getWebcim());
                     valasz.put(o);
                 }
                 out.print(valasz.toString());
@@ -64,8 +65,9 @@ public class Controller extends HttpServlet {
                 String cimF = request.getParameter("cim");
                 String szerzoF = request.getParameter("szerzo");
                 String mufajF = request.getParameter("mufaj");
+                String webcimF = request.getParameter("webcim");
                 
-                Konyv.addNewKonyv(em, cimF, szerzoF, mufajF);
+                Konyv.addNewKonyv(em, cimF, szerzoF, mufajF, webcimF);
                 out.print("minden ok!");
                 
             }
@@ -75,9 +77,10 @@ public class Controller extends HttpServlet {
                 String cimM = request.getParameter("cim");
                 String szerzoM = request.getParameter("szerzo");
                 String mufajM = request.getParameter("mufaj");
+                String webcimM = request.getParameter("webcim");
                 
                 
-                Konyv.updateKonyv(em, cimM, szerzoM, mufajM, idM);
+                Konyv.updateKonyv(em, cimM, szerzoM, mufajM, webcimM, idM);
                 out.print("OK!");
             }
            
@@ -112,7 +115,21 @@ public class Controller extends HttpServlet {
                 String jelszoF = request.getParameter("jelszo");
                 
                 Klubtag.addNewTag(em, nevF, jelszoF);
-                out.print("OK!");
+                Klubtag k = Klubtag.login(em, nevF, jelszoF);
+                if(k != null){
+                    request.getSession().setAttribute("a", k);
+                    JSONObject j = new JSONObject();
+                    j.put("result", "Regisztrációd sikerült!");
+                    j.put("success", "1");
+                    out.print(j.toString());
+                }
+                else{
+                    JSONObject j = new JSONObject();
+                    j.put("result", "Hibás felhasználónév vagy jelszó!");
+                    j.put("success", "0");
+                    out.print(j.toString());
+                }
+                
             }
         }
     }
